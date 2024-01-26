@@ -1,0 +1,14 @@
+{
+  "001":{
+      "name": "Catalyst",
+      "type": "Switch"
+  },
+  "002":{
+      "name": "ASR",
+      "type": "Router"
+  },
+  "003":{
+      "name": "UCS",
+      "type": "Server"
+  }
+}

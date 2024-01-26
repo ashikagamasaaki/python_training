@@ -46,14 +46,68 @@ with open(path84, 'w', encoding='utf-8') as f:
 
 
 # 85    CSVファイルからExcelファイルへの変換: 与えられたCSVファイルをExcelファイルに変換するプログラムを作成してください。
-csv_file = 'resources/sample75.csv'
+csv_file = 'resources/sample75.csv' 
+
+with open(csv_file, 'r', encoding='utf-8') as f:
+    header_str = f.readline().replace('"', '').rstrip('\n')
+    header_body = {key: [] for key in header_str.split(",")}
+    read_line = f.readline()
+    
+    while read_line:
+        read_line_list = read_line.replace('"', '').split(",")
+        for index, key in enumerate(header_body.keys()):
+            # print(f'index={index}, key={key}, value={read_line_list[index]}')
+            header_body.get(key).append(read_line_list[index])
+        read_line = f.readline()
+    
+df_to_write = pd.DataFrame(header_body)
+df_to_write.to_excel('resources/sample85.xlsx', index=False)
 
 
-
+# 85-2(CVSライブラリ使用)
+import csv
+with open(csv_file, 'r', encoding='utf-8') as f:
+    f_list = csv.reader(f, delimiter=",", doublequote=True, lineterminator="\n", quotechar='"', skipinitialspace=True)
+    f_dict = csv.DictReader(f, delimiter=",", doublequote=True, lineterminator="\n", quotechar='"', skipinitialspace=True)
+    
+    df_to_write = pd.DataFrame(f_dict)
+    df_to_write.to_excel('resources/sample85_2.xlsx', index=False)
 
 
 # 86    ExcelファイルからCSVファイルへの変換: 与えられたExcelファイルをCSVファイルに変換するプログラムを作成してください。
+excel_data = pd.read_excel('resources/sample85.xlsx')
+excel_data.to_csv('resources/converted_csv_file.csv', index=False)
+
+print("#######################")
 # 87    JSONファイルからCSVファイルへの変換: 与えられたJSONファイルをCSVファイルに変換するプログラムを作成してください。
+with open('resources/sample87.json', 'r') as f:
+    json_load = json.load(f)
+    csv_data = pd.json_normalize(json_load)
+    csv_data.to_csv('resources/sample87.csv', index=False)
+    print(csv_data)
+
+
 # 88    CSVファイルからJSONファイルへの変換: 与えられたCSVファイルをJSONファイルに変換するプログラムを作成してください。
+csv_file = 'resources/sample75.csv' 
+# csv_data = pd.read_csv(csv_file, sep=",")
+# csv_data.to_json('resources/sample88.json', orient="records")
+
+csv_data = pd.read_csv(csv_file, keep_default_na=False)
+json_data = csv_data.to_dict(orient='records')
+print(json_data)
+with open('resources/sample88.json', 'w', encoding='utf-8') as json_file:
+    json.dump(json_data, json_file, indent=2, ensure_ascii=False)
+
+
 # 89    Excelファイルの特定の行列の抽出: 与えられたExcelファイルから特定の行列のデータを抽出するプログラムを作成してください。
+df = pd.read_excel('resources/sample89.xlsx', sheet_name="Sheet1", usecols=['都道府県名', '人口（総数）']) # 都道府県名、人口総数を取得
+print("#######################")
+print(df)
+
+
 # 90    JSONファイルの特定の要素の抽出: 与えられたJSONファイルから特定の要素のデータを抽出するプログラムを作成してください。
+print("#######################")
+with open('resources/sample90.json', 'r', encoding='utf-8') as f:
+    jd = json.load(f)
+    print(jd['001']['name'])
+    print(f'{json.dumps(jd, indent=4)}')
