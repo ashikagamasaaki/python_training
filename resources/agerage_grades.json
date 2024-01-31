@@ -1,0 +1,20 @@
+{
+  "class": "A",
+  "averages": {
+    "Math": {
+      "total": 257,
+      "count": 3,
+      "average": 85.66666666666667
+    },
+    "English": {
+      "total": 255,
+      "count": 3,
+      "average": 85.0
+    },
+    "Science": {
+      "total": 270,
+      "count": 3,
+      "average": 90.0
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+    "class": "A",
+    "students": [
+      {
+        "name": "John",
+        "grades": {
+          "Math": 90,
+          "English": 85,
+          "Science": 92
+        }
+      },
+      {
+        "name": "Alice",
+        "grades": {
+          "Math": 78,
+          "English": 92,
+          "Science": 88
+        }
+      },
+      {
+        "name": "Bob",
+        "grades": {
+          "Math": 89,
+          "English": 78,
+          "Science": 90
+        }
+      }
+    ]
+  }
