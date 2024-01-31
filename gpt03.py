@@ -49,7 +49,7 @@ print(page_avg)
 
 # 与えられた辞書 person_data があります。この辞書から名前と年齢を取り出し、新しい文字列として整形してください。
 person_data = {'name': 'John', 'age': 30}
-person_str = f"My Name is {person_data.get("name", "name")}! I'm {person_data.get("age", "20")} years old."
+person_str = f"My Name is {person_data.get('name', 'name')}! I'm {person_data.get('age', '20')} years old."
 print(person_str)
 
 
