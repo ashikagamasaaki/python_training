@@ -1,13 +1,13 @@
 """
 Abstract Factory
 
-                    AbstractFactory
-       ↓                 ↓                ↓
+                    AbstractFactory   ←        ←       ←       ←
+       ↓                 ↓                ↓                       ↑
 AbstractProduct3  AbstractProduct2   AbstractProduct1
-       ↑                 ↑                ↑
+       ↑                 ↑                ↑                       ↑
 ConcreteProduct3  ConcreteProduct2   ConcreteProduct1
-       ↑                 ↑                ↑
-                    ConcreteFactory
+       ↑                 ↑                ↑                       ↑
+                    ConcreteFactory   →        →       →       →
 
 AbstractFactory
 ・IFもしくは抽象クラス
@@ -24,17 +24,20 @@ ConcreteProduct
 ・ConcreteFactoryから返される具体的な部品
 """
 from abc import ABCMeta, abstractmethod
+
+# AbstractProduct1
 class Button(metaclass=ABCMeta):
     @abstractmethod
     def press(self):
         pass
     
-    
+# AbstractProduct2
 class Checkbox(metaclass=ABCMeta):
     @abstractmethod
     def switch(self):
         pass
 
+# AbstractFactory
 class GUIFactory(metaclass=ABCMeta):
     @abstractmethod
     def create_button(self) -> Button:
@@ -44,15 +47,17 @@ class GUIFactory(metaclass=ABCMeta):
     def create_checkbox(self) -> Checkbox:
         pass
 
-
+# ConcreteProduct1
 class WindowsButton(Button):
     def press(self):
         print('Windowsのボタンが押されました。')
 
+# ConcreteProduct2
 class WindowsCheckbox(Checkbox):
     def switch(self):
         print('Windowsのチェックボックスが切り替えられました。')
-        
+
+# ConcreteFactory1
 class WindowsGUIFactory(GUIFactory):
     def create_button(self) -> Button:
         return WindowsButton()
@@ -60,15 +65,17 @@ class WindowsGUIFactory(GUIFactory):
     def create_checkbox(self) -> Checkbox:
         return WindowsCheckbox()
     
-    
+# ConcreteProduct3
 class MacButton(Button):
     def press(self):
         print('Macのボタンが押されました。')
 
+# ConcreteProduct4
 class MacCheckbox(Checkbox):
     def switch(self):
         print('Macのチェックボックスが切り替えられました。')
-        
+
+# ConcreteFactory2
 class MacGUIFactory(GUIFactory):
     def create_button(self) -> Button:
         return MacButton()
