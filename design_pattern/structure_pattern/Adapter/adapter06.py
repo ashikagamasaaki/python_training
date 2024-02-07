@@ -15,15 +15,13 @@ class MailMessage:
         return f'メッセージを送信(メール): {self.__msg}'
 
 # Adapter
-class MessageServiceAdapter(MessageService):
-    def __init__(self, mail_msg: MailMessage):
-        self.__mail_msg = mail_msg
-        
+class MessageServiceAdapter(MailMessage, MessageService):
+    def __init__(self, msg):
+        super().__init__(msg)
+    
     def new_send(self):
-        message = self.__mail_msg.send()
+        message = self.send()
         return message + ' **Adapter経由で送信'
     
-adaptee = MailMessage('おはようございます。今から業務を始めます。')
-
-adapter = MessageServiceAdapter(adaptee)
+adapter = MessageServiceAdapter('おはようございます。今から業務を始めます。')
 print(adapter.new_send())
