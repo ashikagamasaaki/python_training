@@ -1,3 +1,5 @@
 myenv/
 design_pattern/generate_pattern/AbstractFactory/__pycache__/
 base/__pycache__/
+base/tests/__pycache__/
+base/booksearch/__pycache__/
